@@ -12,7 +12,9 @@ DESCRIPTION:      Constants
 #define C_omega 7292115.0e-011       // Angular Speed of Earth [rad/s]
 #define C_Req 6378.137               // Equatorial Radius of Earth [km]
 #define g0 9.8065                    // Earth's Surface Gravity (m/s^2)
-#define J2 0.00108263                // Second Zonal Harmonic
+#define J2 0.00108263                // Earth's Second Zonal Harmonic
+#define RS 696000.0                  // Solar Radius [km]
 #define DU C_Req
 #define TU sqrt(pow(DU,3)/C_MU)
+
 #endif

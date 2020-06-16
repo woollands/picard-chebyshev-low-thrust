@@ -16,6 +16,6 @@
 #include <stdlib.h>
 #include "const.hpp"
 
-void eclipse_model(double* x, double P, double rho, bool eclipse, double* Pa );
+void eclipse_model( double t, double* x, double P, bool eclipse, double* Pa, double* TF);
 
 #endif

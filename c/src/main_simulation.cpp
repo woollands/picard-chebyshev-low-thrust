@@ -38,10 +38,30 @@ ofstream out;
 void write_out( const state_type &x , const double t )
 {
     out << t << '\t' << x[0] << '\t' << x[1] << '\t' << x[2] << '\t' << x[3] << '\t' << x[4] << '\t' << x[5] << '\t' << x[6] <<  '\t' << x[7] << '\t' << x[8] << '\t' << x[9] << '\t' << x[10] << '\t' << x[11] << '\t' << x[12] << '\t' << x[13] << '\t' << endl;
+
+    #include "spacecraft_params.hpp"
+    #include "eclipse_model.hpp"
+
+    double Pa;
+    double TF;
+    double y[7] = {0.0};
+    for (int i=0; i<=6; i++){
+      y[i] = x[i];
+    }
+    eclipse_model(t,y,P,true,&Pa,&TF);
+    // printf("TF %f\n",TF);
+
 }
+
+double rho = 1.0;
 
 int main()
 {
+
+    // Load Spice Kernels
+    furnsh_c ( "../../../mice/kernels/naif0012.tls" );
+    furnsh_c ( "../../../mice/kernels/de438.bsp" );
+
     bulirsch_stoer< state_type > controlled_stepper( 1.0E-8 , 1.0E-14 );
 
     state_type x = {{0.0}};
@@ -57,32 +77,37 @@ int main()
     // }
     // // cout << '\n' << endl;
 
-    // Initial Conditions
-    x[0] = 1.82260259877705;
-    x[1] = 0.725;
-    x[2] = 0.0;
-    x[3] = 0.0611626201504845;
-    x[4] = 0.0;
-    x[5] = 0.0;
-    x[6] = 100.0;
-    x[7] = -4.75169058027082;
-    x[8] = -12.6007096436135;
-    x[9] = 0.214505265997245;
-    x[10] = 5.95508267111558;
-    x[11] = -0.0366858149807001;
-    x[12] = 0.00305135494989929;
-    x[13] = 0.118203061064424;
+    for (int i=0; i<1; i++){
 
-    // Time (Canonical Units)
-    double t0 = 0.0;
-    double tf = 642.549910873478;
-    double dt = 1.0;
+      // rho = 0.1*rho;
+      // Initial Conditions
+      x[0] = 1.82260259877705;
+      x[1] = 0.725;
+      x[2] = 0.0;
+      x[3] = 0.0611626201504845;
+      x[4] = 0.0;
+      x[5] = 0.0;
+      x[6] = 100.0;
+      x[7] = -4.75169058027082;
+      x[8] = -12.6007096436135;
+      x[9] = 0.214505265997245;
+      x[10] = 5.95508267111558;
+      x[11] = -0.0366858149807001;
+      x[12] = 0.00305135494989929;
+      x[13] = 0.118203061064424;
 
-    double rho = 1.0;
+      // Time (Canonical Units)
+      double t0 = 0.0;
+      double tf = 642.549910873478;
+      double dt = 1.0;
 
-    out.open( "./output/data.dat" );
-    out.precision(16);
-    // integrate_adaptive( controlled_stepper , states_twobody_thrust , x , t0 , tf , dt , write_out); // Use for accurate final time
-    integrate_const( controlled_stepper , states_twobody_thrust , x , t0 , tf , dt , write_out ); // Use for plotting
-    out.close();
+      // out.open( "./output/data_extra.dat" );
+      out.open( "./output/data.dat" );
+      out.precision(16);
+      // integrate_adaptive( controlled_stepper , states_twobody_thrust , x , t0 , tf , dt , write_out); // Use for accurate final time
+      integrate_const( controlled_stepper , states_twobody_thrust, x , t0 , tf , dt , write_out ); // Use for plotting
+      out.close();
+
+    }
+
 }

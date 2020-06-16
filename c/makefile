@@ -16,15 +16,15 @@ CSPICE = ../../../cspice/lib
 IDIR = include
 SDIR = src
 
-LIBS = -lm -lnlopt
+LIBS = -lnlopt #-lm
 
-_DEPS1_inc = const.hpp states_twobody_thrust.hpp spacecraft_params.hpp eclipse_model.hpp
+_DEPS1_inc = const.hpp states_twobody_thrust.hpp spacecraft_params.hpp eclipse_model.hpp c_functions.hpp
 DEPS1_inc = $(patsubst %,$(IDIR)/%,$(_DEPS1_inc))
 
 _SPICE = cspice.a
 SPICE_lib = $(patsubst %,$(CSPICE)/%,$(_SPICE))
 
-_OBJ1 = main_simulation.o states_twobody_thrust.o eclipse_model.o
+_OBJ1 = main_simulation.o states_twobody_thrust.o eclipse_model.o c_functions.o 
 OBJ1 = $(patsubst %,$(ODIR)/%,$(_OBJ1))
 
 $(ODIR)/%.o: $(SDIR)/%.cpp

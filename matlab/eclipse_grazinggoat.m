@@ -13,8 +13,8 @@ function [TF,PA,ang,alpha] = eclipse_grazinggoat(t,rSC)
 const;
 
 % Sun's state w.r.t. Earth
-[states,~] = cspice_spkezr('SUN', t, 'J2000', 'LT+S', 'EARTH');
-
+% [states,~] = cspice_spkezr('SUN', t, 'J2000', 'LT+S', 'EARTH');
+states = [150e6 0 0]';
 rS    = states(1:3)';   % Sun's position vector
 rS_SC = rS - rSC;       % Spacecraft's position w.r.t. Sun
 rB_SC = -rSC;           % Spacecraft's position w.r.t. Body (Earth)
@@ -38,7 +38,7 @@ if -(rSC-Xp)*rS' >= norm(rS-Xp)*cos(alpha)
     
     % Grazing Goat Model
     A = r2 * acos((d2 +r2 - R2)/(2*d*r)) + R2 * acos((d2 - r2 + R2)/(2*d*R))...
-        - 0.5*sqrt((d+r-R)*(d-r+R)*(-d+r+R)*(d+r+R));
+        - 0.5*sqrt((d+r-R)*(d-r+R)*(-d+r+R)*(d+r+R))
     
     Areal = real(A);
     Atot = pi*Rapp^2;

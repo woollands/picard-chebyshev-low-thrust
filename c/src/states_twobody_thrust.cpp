@@ -21,8 +21,7 @@ typedef boost::array< double , 14 > state_type;
 
 void states_twobody_thrust( const state_type &x , state_type &dxdt , const double t ){
 
-  // // Temp
-  double rho = 1.0;
+  extern double rho;
 
   // MEE States
   double p = x[0];
@@ -34,12 +33,14 @@ void states_twobody_thrust( const state_type &x , state_type &dxdt , const doubl
   double m = x[6];
 
   double Pa;
+  double TF;
   double y[7] = {0.0};
   for (int i=0; i<=6; i++){
     y[i] = x[i];
   }
 
-  eclipse_model(y,P,rho,true,&Pa);
+  eclipse_model(t,y,P,true,&Pa,&TF);
+  // printf("TF %f\n",TF);
 
   double Thr = Pa*A*eff/Isp/g0;  // Available Thrust (N)
 

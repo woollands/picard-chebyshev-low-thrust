@@ -1,7 +1,7 @@
 /*
 *  AUTHORS:          Robyn Woollands (robyn.woollands@gmail.com)
 *  DATE WRITTEN:     Feb 2017
-*  LAST MODIFIED:    Feb 2017
+*  LAST MODIFIED:    June 2020
 *  AFFILIATION:      Department of Aerospace Engineering, Texas A&M University, College Station, TX
 *  DESCRIPTION:      Header file
 */
@@ -19,27 +19,29 @@
 // OUTPUT: vector c, (c = axb)
 void cross_product_3D( double* a, double* b, double* c );
 
-void Cnorm( double* a, double* n);
+double Cnorm( double* a, int len );
 
-void find_less(double* a, double l, int len, double* ind);
+double Cdot(double* a, double* b, int len);
 
-void find_less_equal(double* a, double* le, int len, double* ind);
+// void find_less(double* a, double l, int len, double* ind);
+//
+// void find_less_equal(double* a, double* le, int len, double* ind);
+//
+// void find_more(double* a, double m, int len, double* ind);
+//
+// void find_more_equal(double* a, double me, int len, double* ind);
+//
+// void find_equal(double* a, double e, int len, double* res);
 
-void find_more(double* a, double m, int len, double* ind);
+double Cmax( double* a, int len );
 
-void find_more_equal(double* a, double me, int len, double* ind);
+double Cmin( double* a, int len );
 
-void find_equal(double* a, double e, int len, double* res);
+// void Cabs( double* a, int size, double* b);
 
-void Cmax( double* a, int size, double* max );
-
-void Cmin( double* a, int size, double* min );
-
-void Cabs( double* a, int size, double* b);
-
-void matadd( double* a, double* b, int size, double* c );
-
-void matsub( double* a, double* b, int size, double* c );
+// void matadd( double* a, double* b, int size, double* c );
+//
+// void matsub( double* a, double* b, int size, double* c );
 
 /*!
 * \brief Matrix Multiplication

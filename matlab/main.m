@@ -53,3 +53,6 @@ title('Angle w.r.t. Penumbral Cone Axis')
 xlabel('Time (hours)')
 ylabel('Angle (deg)')
 
+figure(4)
+plot(time-time(1),TF)
+
